@@ -1,0 +1,89 @@
+<div class="centered-content">
+  <div class="task-manager-container">
+    <div class="sidebar has-background-white">
+      <h1 class="title has-text-primary">
+        My Lists
+      </h1>
+      <div class="list-menu">
+        <a
+          class="list-menu-item"
+          *ngFor="let list of lists"
+          [routerLink]="['/lists', list._id]"
+          routerLinkActive="is-active"
+        >
+          <p>{{ list.title }}</p>
+        </a>
+      </div>
+      <button class="button is-primary has-text-white" routerLink="/new-list">
+        + New List
+      </button>
+    </div>
+    <div class="task-list-container has-background-light">
+      <div *ngIf="tasks; else noTasks">
+        <div class="top-bar">
+          <div class="dropdown is-hoverable is-left">
+            <div class="dropdown-trigger">
+              <button class="button">
+                <span class="icon is-small">
+                  <i class="fas fa-cog"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <a
+                  [routerLink]="['/edit-list', selectedListId]"
+                  class="dropdown-item has-text-success"
+                >
+                  Edit
+                </a>
+                <a
+                  (click)="onDeleteListClick()"
+                  class="dropdown-item has-text-danger"
+                >
+                  Delete List
+                </a>
+              </div>
+            </div>
+          </div>
+          <h1 class="title has-text-primary">Tasks</h1>
+          <button
+            routerLink="./new-task"
+            class="circle-add-button button is-primary"
+          >
+            <img src="../../../assets/plus-icon.svg" alt="Plus Icon" />
+          </button>
+        </div>
+        <div
+          class="task"
+          *ngFor="let task of tasks"
+          (click)="onTaskClick(task)"
+          [ngClass]="{ completed: task.completed }"
+        >
+          <div class="task-text">
+            <p class="text">{{ task.title }}</p>
+          </div>
+          <div class="task-buttons">
+            <button
+              [routerLink]="['/lists', selectedListId, 'edit-task', task._id]"
+              class="button is-success has-text-white"
+            >
+              <i class="fas fa-pen"></i></button
+            ><button
+              class="button is-danger"
+              (click)="onDeleteTaskClick(task._id)"
+            >
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+        <h3 *ngIf="!tasks.length">
+          <h3 class="empty-state-text">No Tasks Here! Click + To Add!</h3>
+        </h3>
+      </div>
+      <ng-template #noTasks>
+        <h3 class="empty-state-text">Select A List</h3>
+      </ng-template>
+    </div>
+  </div>
+</div>
