@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class WebRequestService {
   readonly ROOT_URL;
   constructor(private http: HttpClient) {
-    this.ROOT_URL = 'http://localhost:8080';
+    this.ROOT_URL = 'https://orsh-tasks.herokuapp.com';
   }
   get(uri: string) {
     return this.http.get(`${this.ROOT_URL}/${uri}`);
