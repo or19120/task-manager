@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class WebRequestService {
   readonly ROOT_URL;
   constructor(private http: HttpClient) {
-    this.ROOT_URL = 'http://localhost:3000';
+    this.ROOT_URL = 'http://localhost:8080';
   }
   get(uri: string) {
     return this.http.get(`${this.ROOT_URL}/${uri}`);
